@@ -1,0 +1,9 @@
+name: SuperPowers
+version: ${project.version}
+main: net.reflxction.superpowers.core.SuperPowers
+authors: [Reflxction]
+softdepend: [TitleAPI]
+description: A plugin which adds super powers and abilities
+commands:
+  ability:
+    description: Open the abilities GUI.

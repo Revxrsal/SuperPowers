@@ -1,0 +1,7 @@
+Messages:
+  NoPermissionCommand: "&cYou don't have permission to use this command!"
+  NoPermissionAbility: "&cYou don't have permission to use this abilityType!"
+  NotPlayer: "&cThis command can be used by players only!"
+  SendMessageOnAbility: true # Should a message be sent when a player activates their abilityType?
+  MessageOnAbility: "&aYour abilityType has been activated!" # Message to be sent when the player activates their abilityType. Option above must be enabled to work
+  AbilityOnCooldown: "&c{abilityType} is on cooldown! Time left: &b{time_left}" # Send this message if the player attempts to use their abilityType while it's on cooldown

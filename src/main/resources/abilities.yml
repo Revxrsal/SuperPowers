@@ -1,0 +1,98 @@
+
+# Abilities:
+# Invisibility Cloak: Player becomes invisible when sneaking. Name: InvisibleCloak
+# Fire Punch: A chance for the player to set the enemy on fire when attacking it. Name: FirePunch
+# Bomber: A chance for the player to create an explosion when dying. Name: Bomber
+# Thor: A chance for the player to strike a lightning when attacking an enemy
+# Vampire: A chance for the player
+
+Abilities:
+  GUI-Name: "&eAbilities"
+  InvisibilityCloak:
+    Enabled: true
+    Item:
+      Material: SULPHUR # Item of the abilityType in the GUI. Notice that SULPHUR is Gun powder (weird Bukkit naming). Name must be in upper case
+      Name: "&7Invisibility Cloak" # Name of the abilityType in the GUI
+      Lore: # Lore of the abilityType in the GUI. Can add multiple lines beside the ones below
+        - '&eBecome invisible when sneaking!'
+      Glow: false # Should the item glow (as if it had an enchantment)
+      Slot: 0 # Slot in the GUI. Starts counting from 0
+    ShowParticles: false # Should the effect release particles when the player is invisible?
+    Duration: 600 # Duration of the effect in ticks. 20 ticks = 1 second. Set to -1 if you want it to last permanently.
+    Cooldown: 1 # Cooldown of the abilityType (in seconds). Set to 0 if you don't want a delay.
+    DisabledWorlds: # Worlds in which the abilityType should not work
+      - "world"
+  Bomber:
+    Enabled: true
+    Chance: 50 # Percentage of making an explosion. Set to 100 if you want it the explosion to always occur
+    ExplosionPower: 2 # The power of the explosion. Set to 0 if you don't want the explosion to destroy any blocks
+    Item:
+      Material: TNT # Item of the abilityType in the GUI. Notice that SULPHUR is Gun powder (weird Bukkit naming). Name must be in upper case
+      Name: "&7Bomber" # Name of the abilityType in the GUI
+      Lore: # Lore of the abilityType in the GUI. Can add multiple lines beside the ones below
+        - '&6A chance to create an explosion when dying!'
+        - '&9Death was never that fun!'
+      Glow: false
+      Slot: 1 # Slot in the GUI. Starts counting from 0
+    Cooldown: 1
+    DisabledWorlds: # Worlds in which the abilityType should not work
+      - "world"
+  FirePunch:
+    Enabled: true
+    Chance: 40 # Percentage of setting the enemy on fire when hit with a fist. Set to 100 if you want it to always occur
+    FireLastsFor: 60 # For how long should the fire last for, in ticks. 20 ticks = 1 second
+    Item:
+      Material: FIREBALL
+      Name: "&cFire Punch"
+      Lore:
+        - ''
+        - '&cA chance to set your enemy on fire'
+        - '&bI mean we all love kebab!'
+      Glow: false
+      Slot: 2
+    Cooldown: 1
+    DisabledWorlds:
+      - "world"
+  Thor:
+    Enabled: true
+    Chance: 40
+    Item:
+      Material: IRON_AXE
+      Name: "&eThor"
+      Lore:
+        - ''
+        - '&eStrike!'
+        - '&bStrike more!'
+      Glow: false
+      Slot: 3
+    Cooldown: 1
+    DisabledWorlds:
+        - "world"
+  Vampire:
+    Enabled: true
+    Chance: 30
+    Duration: 120 # For how much should the poison effect last for
+    Item:
+      Material: EYE_OF_ENDER
+      Name: "&cVampire"
+      Lore:
+        - '&eBite your enemies and'
+        - '&elet them regret fighting!'
+      Glow: false
+      Slot: 4
+    DisabledWorlds:
+      - "world"
+  IronFist:
+    Enabled: true
+    Chance: 30 # For how much should the speed effect last on the player. Set to -1 if you want it to last permanently.
+    ExtraDamage: 4 # The extra damage the ability should deal when attacking
+    Item:
+      Material: IRON_INGOT
+      Name: "&fIron Fist"
+      Lore:
+        - "&eDeal more damage"
+        - "&ewhen attacking"
+      Glow: true
+      Slot: 5
+    DisabledWorlds:
+      - "world"

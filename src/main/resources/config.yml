@@ -1,0 +1,10 @@
+Command-Delay: 10 # Delay of the command in seconds. Set to 0 if you don't want a delay.
+CheckForUpdates: true # Should the plugin check for updates?
+
+ShowTitleOnAbility: true # Should it send a title when the player's ability is activated
+TitleOnAbility: "&cAbility activated!" # Title, only works if the option above is enabled
+Subtitle: "" # Subtitle
+FadeIn: 10 # Fade-in time for the title in ticks. 20 ticks = 1 second
+Stay: 10 # Stay time for the title in ticks.
+FadeOut: 10 # Fade-out time for the title in ticks
+
