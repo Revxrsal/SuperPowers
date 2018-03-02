@@ -26,7 +26,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 public abstract class AbstractProjectileListener implements Listener, ConfigAccess {
 
-    protected String projectileName;
+    private String projectileName;
 
     private SuperPowers m;
 

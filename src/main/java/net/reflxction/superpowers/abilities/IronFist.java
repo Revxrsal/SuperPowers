@@ -37,7 +37,7 @@ public class IronFist implements AbilityListener {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
-    private final IronFistConfig ifconfig = new IronFistConfig(m);  
+    private final IronFistConfig ifconfig = new IronFistConfig(m);
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {

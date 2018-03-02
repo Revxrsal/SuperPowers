@@ -18,11 +18,8 @@ package net.reflxction.superpowers.utils.managers;
 
 import net.reflxction.superpowers.api.ConfigAccess;
 import net.reflxction.superpowers.core.SuperPowers;
-import org.bukkit.ChatColor;
 
-import java.util.List;
-
-public class ConfigVariables implements ConfigAccess{
+public class ConfigVariables implements ConfigAccess {
 
     private SuperPowers m;
 
@@ -38,33 +35,6 @@ public class ConfigVariables implements ConfigAccess{
         return getConfig().getString(path);
     }
 
-    /**
-     * @param path Path to the variable
-     * @return Integer value of the entered path
-     */
-    private int getInt(String path) {
-        return getConfig().getInt(path);
-    }
-
-    /**
-     * @param path Path to the variable
-     * @return List of String objects of the entered path
-     */
-    public List<String> getList(String path) {
-        List<String> list = getConfig().getStringList(path);
-        for (int i = 0; i < list.size(); i++) {
-            list.set(i, ChatColor.translateAlternateColorCodes('&', list.get(i)));
-        }
-        return list;
-    }
-
-    /**
-     * @return Duration of the invisibility cloak in ticks.
-     */
-
-    /**
-     * @return Should the invisibility cloak show particles when invisible
-     */
 
     public String getAbilitiesGuiName() {
         return getString("AbilityGuiName");
@@ -76,11 +46,7 @@ public class ConfigVariables implements ConfigAccess{
 
 
     public int getAbilityCommandCooldown() {
-        return getInt("Ability-Command-Delay");
-    }
-
-    public int getBAbilityCommandCooldown() {
-        return getInt("BowAbility-Command-Delay");
+        return getConfig().getInt("Ability-Command-Delay");
     }
 
 

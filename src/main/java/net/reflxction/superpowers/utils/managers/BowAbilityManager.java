@@ -34,7 +34,7 @@ public class BowAbilityManager implements ConfigAccess {
 
     public BowAbility getAbility(Player p) {
         String abilityName = getPlayerDataFile().getString("Players." + p.getName() + ".BowAbility");
-        return BowAbility.getAbilityByName(abilityName);
+        return BowAbility.getAbilityByName(abilityName).get();
     }
 
     public void setAbility(Player p, BowAbility ability) {

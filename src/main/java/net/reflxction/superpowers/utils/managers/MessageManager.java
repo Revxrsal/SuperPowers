@@ -32,7 +32,7 @@ public class MessageManager {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
-    private final String format(String s) {
+    private String format(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 

@@ -39,7 +39,7 @@ public class InfiniteArrows extends AbstractProjectileListener {
 
     public InfiniteArrows(SuperPowers m) {
         super(m);
-        this.m = (m == null || this.m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
+        this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
     @EventHandler

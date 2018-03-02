@@ -33,8 +33,7 @@ public class AbilityManager {
 
     public AbilityType getAbility(Player p) {
         String abilityName = m.getPlayerDataConfig().getString("Players." + p.getName() + ".Ability");
-        AbilityType a = AbilityType.getAbilityByName(abilityName) == null ? AbilityType.NONE : AbilityType.getAbilityByName(abilityName);
-        return a;
+        return AbilityType.getAbilityByName(abilityName) == null ? AbilityType.NONE : AbilityType.getAbilityByName(abilityName);
     }
 
     public void setAbility(Player p, AbilityType abilityType) {

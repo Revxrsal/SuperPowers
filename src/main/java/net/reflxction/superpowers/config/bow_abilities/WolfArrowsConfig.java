@@ -42,11 +42,11 @@ public class WolfArrowsConfig implements IBowAbiliyConfigHandler {
         return getInt("BowAbilities.WolfArrows.Chance");
     }
 
-    public int wolvesToSpawn() {
+    private int wolvesToSpawn() {
         return getInt("BowAbilities.WolfArrows.WolvesToSpawn");
     }
 
-    public void manageWolf(Wolf w, Player p) {
+    private void manageWolf(Wolf w, Player p) {
         w.setOwner(p);
         if (getBoolean("BowAbilities.WolfArrows.RenameWolf")) {
             String name = ChatColor.translateAlternateColorCodes('&', getString("BowAbilities.WolfArrows.WolfName").replace("{player}", p.getName()));
