@@ -1,0 +1,133 @@
+BowAbilities:
+  ExplosiveArrows:
+    Chance: 40
+    Enabled: true
+    ExplosionPower: 2
+    LeaveFire: true
+    Item:
+      Material: TNT
+      Name: "&cExplosive Arrows"
+      Lore:
+        - ''
+        - '&eA chance to make an explosion when &mbow spamming'
+      Glow: true
+      Slot: 10
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
+    DisabledWorlds:
+      - ''
+  FlamingArrows:
+    Chance: 40
+    Enabled: true
+    Item:
+      Material: BLAZE_POWDER
+      Name: "&6Flaming Arrows"
+      Lore:
+        - ''
+        - '&eA chance to set the arrow on fire'
+      Glow: true
+      Slot: 12
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
+    DisabledWorlds:
+      - ''
+  MonsterArrows:
+    Chance: 40
+    Enabled: true
+    Item:
+      Material: ROTTEN_FLESH
+      Name: "&eMonster arrows"
+      Lore:
+        - ''
+        - "&7A chance to summon monsters on the arrow's landing location"
+      Glow: true
+      Slot: 14
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
+    EntitiesToSpawn:
+      - 'SilverFish'
+      - 'Zombie'
+    DisabledWorlds:
+      - ''
+  WolfArrows:
+    Chance: 60
+    Enabled: true
+    WolvesToSpawn: 1
+    RenameWolf: true
+    SetNameVisible: true
+    WolfHealth: 20
+    WolfName: "&e{player}'s &bdog"
+    Item:
+      Material: BONE
+      Name: "&7Wolf Arrows"
+      Lore:
+        - ''
+        - '&bAnd dogs are the best pets'
+      Glow: true
+      Slot: 16
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
+  InfiniteArrows:
+    Chance: 40
+    Enabled: true
+    PlayersOnly: true # Should the player receive an arrow only when hitting players, or would it work on other entities
+    Item:
+      Material: TRIPWIRE_HOOK
+      Name: "&7Infinite Arrows"
+      Lore:
+        - ''
+        - '&eA chance to receive another arrow when hitting an entity'
+      Glow: true
+      Slot: 29
+    DisabledWorlds:
+      - ''
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
+  QuickArchery:
+    Chance: 40
+    Enabled: true
+    PlayersOnly: true # Should the player receive an arrow only when hitting players, or would it work on other entities
+    SpeedDuration: 120 # Speed durtion in ticks. 20 ticks = 1 second.
+    SpeedAmplifier: 1 # Amplifier of the speed. Start counting from 0
+    Item:
+      Material: FEATHER
+      Name: "&8Quick Archery"
+      Lore:
+        - ''
+        - '&eA chance to receive speed while bow spamming!'
+      Glow: true
+      Slot: 31
+    DisabledWorlds:
+      - ''
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""

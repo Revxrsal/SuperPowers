@@ -4,10 +4,10 @@
 # Fire Punch: A chance for the player to set the enemy on fire when attacking it. Name: FirePunch
 # Bomber: A chance for the player to create an explosion when dying. Name: Bomber
 # Thor: A chance for the player to strike a lightning when attacking an enemy
-# Vampire: A chance for the player
+# Vampire: A chance for the player to give the enemy a poison effect
+# Iron Fist: A chance for the player to cause extra damage
 
 Abilities:
-  GUI-Name: "&eAbilities"
   InvisibilityCloak:
     Enabled: true
     Item:
@@ -16,7 +16,7 @@ Abilities:
       Lore: # Lore of the abilityType in the GUI. Can add multiple lines beside the ones below
         - '&eBecome invisible when sneaking!'
       Glow: false # Should the item glow (as if it had an enchantment)
-      Slot: 0 # Slot in the GUI. Starts counting from 0
+      Slot: 10 # Slot in the GUI. Starts counting from 0
     ShowParticles: false # Should the effect release particles when the player is invisible?
     Duration: 600 # Duration of the effect in ticks. 20 ticks = 1 second. Set to -1 if you want it to last permanently.
     Cooldown: 1 # Cooldown of the abilityType (in seconds). Set to 0 if you don't want a delay.
@@ -33,8 +33,15 @@ Abilities:
         - '&6A chance to create an explosion when dying!'
         - '&9Death was never that fun!'
       Glow: false
-      Slot: 1 # Slot in the GUI. Starts counting from 0
+      Slot: 13 # Slot in the GUI. Starts counting from 0
     Cooldown: 1
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
     DisabledWorlds: # Worlds in which the abilityType should not work
       - "world"
   FirePunch:
@@ -49,8 +56,15 @@ Abilities:
         - '&cA chance to set your enemy on fire'
         - '&bI mean we all love kebab!'
       Glow: false
-      Slot: 2
+      Slot: 16
     Cooldown: 1
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
     DisabledWorlds:
       - "world"
   Thor:
@@ -64,14 +78,23 @@ Abilities:
         - '&eStrike!'
         - '&bStrike more!'
       Glow: false
-      Slot: 3
+      Slot: 29
     Cooldown: 1
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
     DisabledWorlds:
         - "world"
   Vampire:
     Enabled: true
     Chance: 30
     Duration: 120 # For how much should the poison effect last for
+    GiveRegenOnHit: true # Should it give the player regeneration when activating the ability
+    RegenDuration: 60 # The duration of regeneration in ticks. 20 ticks = 1 second. Only works if the above option is enabled
     Item:
       Material: EYE_OF_ENDER
       Name: "&cVampire"
@@ -79,7 +102,15 @@ Abilities:
         - '&eBite your enemies and'
         - '&elet them regret fighting!'
       Glow: false
-      Slot: 4
+      Slot: 31
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
+
     DisabledWorlds:
       - "world"
   IronFist:
@@ -93,6 +124,13 @@ Abilities:
         - "&eDeal more damage"
         - "&ewhen attacking"
       Glow: true
-      Slot: 5
+      Slot: 33
+    TitleOnAbility:
+      Show: true
+      FadeInTicks: 10
+      StayTicks: 10
+      FadeOutTicks: 10
+      Title: "&eAbility activated!"
+      Subtitle: ""
     DisabledWorlds:
       - "world"

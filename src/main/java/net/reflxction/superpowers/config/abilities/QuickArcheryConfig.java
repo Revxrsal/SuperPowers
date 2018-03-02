@@ -1,5 +1,5 @@
 /*
- * * Copyright 2017-2018 github.com/ReflxctionDev
+ * * Copyright 2018 github.com/ReflxctionDev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,16 @@
 
 package net.reflxction.superpowers.config.abilities;
 
-import net.reflxction.superpowers.config.IAbilityConfigHandler;
-import net.reflxction.superpowers.core.AbilityType;
+import net.reflxction.superpowers.config.IBowAbiliyConfigHandler;
+import net.reflxction.superpowers.core.BowAbility;
 import net.reflxction.superpowers.core.SuperPowers;
 
-public class InvisibleCloakConfig implements IAbilityConfigHandler {
+public class QuickArcheryConfig implements IBowAbiliyConfigHandler {
 
     private SuperPowers m;
 
-    public InvisibleCloakConfig(SuperPowers m) {
+    public QuickArcheryConfig(SuperPowers m) {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
-    }
-
-    @Override
-    public AbilityType getAbility() {
-        return AbilityType.INVISIBLE_CLOAK;
     }
 
     @Override
@@ -38,12 +33,25 @@ public class InvisibleCloakConfig implements IAbilityConfigHandler {
         return m;
     }
 
-    public boolean showParticles() {
-        return getBoolean("Abilities.InvisibilityCloak.ShowParticles");
+    @Override
+    public BowAbility getAbility() {
+        return BowAbility.QUICK_ARCHERY;
+    }
+
+    public int getChance() {
+        return getInt("BowAbilities.QuickArchery.Chance");
+    }
+
+    public boolean playersOnly() {
+        return getBoolean("BowAbilities.QuickArchery.PlayersOnly");
     }
 
     public int getDuration() {
-        return getInt("Abilities.InvisibilityCloak.Duration");
+        return getInt("BowAbilities.QuickArchery.SpeedDuration");
+    }
+
+    public int getAmplifier() {
+        return getInt("BowAbilities.QuickArchery.SpeedAmplifier");
     }
 
 }

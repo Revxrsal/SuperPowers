@@ -1,5 +1,5 @@
-/*
- * * Copyright 2017-2018 github.com/ReflxctionDev
+package net.reflxction.superpowers.abilities;/*
+ * * Copyright 2018 github.com/ReflxctionDev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package net.reflxction.superpowers.abilities;
-
 import net.reflxction.superpowers.core.SuperPowers;
-import net.reflxction.superpowers.gui.AbilityGUI;
+import net.reflxction.superpowers.gui.BowAbilityGUI;
 import net.reflxction.superpowers.utils.CheckUtils;
 import net.reflxction.superpowers.utils.managers.ConfigVariables;
 import net.reflxction.superpowers.utils.managers.MessageManager;
 import net.reflxction.superpowers.utils.managers.StringManager;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,50 +31,46 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * Represents the /ability command, which opens a GUI to select abilities
+ * Represents the class command for /bowability
  */
+public class BowAbilityCommand implements CommandExecutor {
 
-public class AbilityCommand implements CommandExecutor {
+    // Hashmaps which manage the delay
+    private HashMap<UUID, Integer> cooldownTime = new HashMap<>();
+    private HashMap<UUID, BukkitRunnable> cooldownTask = new HashMap<>();
 
     // Main class instance
     private SuperPowers m;
 
+    // Bow ability GUI manager
+    private BowAbilityGUI gui = new BowAbilityGUI(m);
 
-    public AbilityCommand(SuperPowers m) {
-        // Use the static method if the constructor fails
+    // Managers instances
+    private ConfigVariables c = new ConfigVariables(m);
+    private StringManager su = new StringManager();
+    private MessageManager mm = new MessageManager(m);
+
+    /**
+     * @param m Main class instance
+     */
+    public BowAbilityCommand(SuperPowers m) {
+        // Use the static method provided by Bukkit if the constructor fails
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
-    // Instance of the ability GUI
-    private AbilityGUI a = new AbilityGUI(m);
-
-    // Instance of the message manager
-    private MessageManager mm = new MessageManager(m);
-
-    // Instance of the main config variables
-    private ConfigVariables c = new ConfigVariables(m);
-
-    // Instance of the String manager utility
-    private StringManager su = new StringManager();
-
-    // Cooldown hashmaps
-    private HashMap<UUID, Integer> cooldownTime = new HashMap<>();
-    private HashMap<UUID, BukkitRunnable> cooldownTask = new HashMap<>();
-
-
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String lbl, String[] args) {
         // Check if the sender is a player
         if (!CheckUtils.isPlayer(sender)) {
             // Send the message if they weren't
-            sender.sendMessage(mm.getNotPlayerMessage());
+            sender.sendMessage(ChatColor.RED + "This command is for players only!");
         }
         // Checking if it's a player
         else {
             // Casting the sender to a player to use the player methods
             Player p = (Player) sender;
             // Checking if they have the permission to use the command
-            if (p.hasPermission("superpowers.abilities.command")) {
+            if (p.hasPermission("superpowers.bow_abilities.command")) {
                 // CHeck if their delay isn't over yet
                 if (cooldownTime.containsKey(p.getUniqueId())) {
                     // Send the delay message
@@ -96,9 +91,8 @@ public class AbilityCommand implements CommandExecutor {
                             }
                         }
                     });
-                    cooldownTask.get(uuid).runTaskTimer(m, 20, 20);
-                    // After putting the delay, open the GUI
-                    a.openGUI(p);
+                    // After adding the delay, open the GUI
+                    gui.openGUI(p);
                     return true;
                 }
             } else {

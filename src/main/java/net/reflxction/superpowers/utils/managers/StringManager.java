@@ -1,4 +1,20 @@
-package net.reflxction.superpowers.utils;
+/*
+ * * Copyright 2018 github.com/ReflxctionDev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package net.reflxction.superpowers.utils.managers;
 
 import net.reflxction.superpowers.core.AbilityType;
 import net.reflxction.superpowers.core.SuperPowers;
@@ -8,10 +24,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-/**
- * Created by Reflxction, on 01/31/18.
- */
-public class StringUtils {
+public class StringManager {
 
     public String capitalise(String string) {
         String s = string.substring(0, 1).toUpperCase();
@@ -23,13 +36,13 @@ public class StringUtils {
     }
 
     public String filter(String s, Player p, int delay) {
-        AbilityType abilityType = new AbilityManager(SuperPowers.getPlugin()).getAbility(p);
+        AbilityType abilityType = new AbilityManager(SuperPowers.getPlugin(SuperPowers.class)).getAbility(p);
         return s.replace("{player}", p.getName()).replace("{ability}", abilityType.getName()).replace("{time_left}", s(delay));
     }
 
 
     public String filter(String s, Player p) {
-        AbilityType abilityType = new AbilityManager(SuperPowers.getPlugin()).getAbility(p);
+        AbilityType abilityType = new AbilityManager(SuperPowers.getPlugin(SuperPowers.class)).getAbility(p);
         return s.replace("{player}", p.getName()).replace("{abilityType}", abilityType.getName());
     }
 

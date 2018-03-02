@@ -14,36 +14,36 @@
  * limitations under the License.
  */
 
-package net.reflxction.superpowers.config.abilities;
+package net.reflxction.superpowers.api;
 
-import net.reflxction.superpowers.config.IAbilityConfigHandler;
-import net.reflxction.superpowers.core.AbilityType;
 import net.reflxction.superpowers.core.SuperPowers;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class BomberConfig implements IAbilityConfigHandler {
+import java.io.File;
 
-    private SuperPowers m;
+public interface ConfigAccess {
 
-    public BomberConfig(SuperPowers m) {
-        this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
+    SuperPowers getPlugin();
+    
+    default FileConfiguration getConfig() {
+        return getPlugin().getConfig();
     }
 
-    @Override
-    public AbilityType getAbility() {
-        return AbilityType.BOMBER;
+    default FileConfiguration getPlayerDataFile() {
+        return getPlugin().getPlayerDataConfig();
     }
 
-    @Override
-    public SuperPowers getPlugin() {
-        return m;
+    default FileConfiguration getAbilitiesConfig() {
+        return getPlugin().getAbilitiesConfig();
     }
 
-    public int getChance() {
-        return getInt("Abilities.Bomber.Chance");
+    default FileConfiguration getBowAbilitiesConfig() {
+        return getPlugin().getBowAbilitiesConfig();
     }
 
-    public int getExplosionPower() {
-        return getInt("Abilities.Bomber.ExplosionPower");
+    default File getDataFolder() {
+        return getPlugin().getDataFolder();
     }
 
 }

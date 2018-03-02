@@ -17,7 +17,11 @@
 package net.reflxction.superpowers.core;
 
 import net.reflxction.superpowers.abilities.*;
-import net.reflxction.superpowers.gui.AbilityInventoryListener;
+import net.reflxction.superpowers.bowabilities.*;
+import net.reflxction.superpowers.example.ApiEventExample;
+import net.reflxction.superpowers.gui.AbilityGUIListener;
+import net.reflxction.superpowers.gui.BowGUIListener;
+import net.reflxction.superpowers.utils.LoggerUtils;
 import net.reflxction.superpowers.utils.managers.FileManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,24 +34,35 @@ public final class SuperPowers extends JavaPlugin {
 
     final FileManager fileManager = new FileManager(this);
 
+
+    public boolean titleAPI = false;
     private FileConfiguration playerData = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "playerdata.yml"));
-
     private FileConfiguration messages = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "messages.yml"));
-
     private FileConfiguration abilitiesConfig = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "abilities.yml"));
-
     private FileConfiguration bowAbilitiesConfig = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "bow-abilities.yml"));
 
     @Override
     public void onEnable() {
+        if (isPluginAvailable("TitleAPI")) {
+            titleAPI = true;
+            LoggerUtils.log("&1--------------------------------");
+            LoggerUtils.log("&aTitleAPI detected. Enabling title functions");
+            LoggerUtils.log("&1--------------------------------");
+        } else {
+            titleAPI = false;
+            LoggerUtils.log("&1--------------------------------");
+            LoggerUtils.log("&cTitleAPI wasn't detected. Disabling title functions");
+            LoggerUtils.log("&1--------------------------------");
+        }
         loadConfig();
         registerEvents();
         getCommand("ability").setExecutor(new AbilityCommand(this));
+        getCommand("bowability").setExecutor(new BowAbilityCommand(this));
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+
     }
 
     private void loadConfig() {
@@ -65,21 +80,27 @@ public final class SuperPowers extends JavaPlugin {
 
     private void registerEvents() {
         final PluginManager pm = this.getServer().getPluginManager();
+        // A
+        pm.registerEvents(new AbilityGUIListener(this), this);
+        // B
         pm.registerEvents(new InvisibleCloak(this), this);
-        pm.registerEvents(new AbilityInventoryListener(this), this);
         pm.registerEvents(new FirePunch(this), this);
-        pm.registerEvents(new Bomber(), this);
-        pm.registerEvents(new Thor(), this);
-        pm.registerEvents(new Vampire(), this);
-        pm.registerEvents(new IronFist(), this);
+        pm.registerEvents(new Bomber(this), this);
+        pm.registerEvents(new Thor(this), this);
+        pm.registerEvents(new Vampire(this), this);
+        pm.registerEvents(new IronFist(this), this);
+        pm.registerEvents(new ExplosiveArrows(this), this);
+        pm.registerEvents(new BowGUIListener(this), this);
+        pm.registerEvents(new FlamingArrows(this), this);
+        pm.registerEvents(new ApiEventExample(), this);
+        pm.registerEvents(new MonsterArrows(this), this);
+        pm.registerEvents(new WolfArrows(this), this);
+        pm.registerEvents(new InfiniteArrows(this), this);
+        pm.registerEvents(new QuickArchery(this), this);
     }
 
     public FileConfiguration getPlayerDataConfig() {
         return playerData;
-    }
-
-    public static SuperPowers getPlugin() {
-        return SuperPowers.getPlugin(SuperPowers.class);
     }
 
     public FileConfiguration getMessagesConfig() {
@@ -93,4 +114,13 @@ public final class SuperPowers extends JavaPlugin {
     public FileConfiguration getBowAbilitiesConfig() {
         return bowAbilitiesConfig;
     }
+
+    private boolean isPluginAvailable(String plugin) {
+        return getServer().getPluginManager().getPlugin(plugin) != null;
+    }
+
+    public boolean isTitleApiAvailable() {
+        return titleAPI;
+    }
+
 }

@@ -20,17 +20,17 @@ import net.reflxction.superpowers.config.IAbilityConfigHandler;
 import net.reflxction.superpowers.core.AbilityType;
 import net.reflxction.superpowers.core.SuperPowers;
 
-public class InvisibleCloakConfig implements IAbilityConfigHandler {
+public class ThorConfig implements IAbilityConfigHandler {
 
     private SuperPowers m;
 
-    public InvisibleCloakConfig(SuperPowers m) {
+    public ThorConfig(SuperPowers m) {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
     @Override
     public AbilityType getAbility() {
-        return AbilityType.INVISIBLE_CLOAK;
+        return AbilityType.THOR;
     }
 
     @Override
@@ -38,12 +38,8 @@ public class InvisibleCloakConfig implements IAbilityConfigHandler {
         return m;
     }
 
-    public boolean showParticles() {
-        return getBoolean("Abilities.InvisibilityCloak.ShowParticles");
-    }
-
-    public int getDuration() {
-        return getInt("Abilities.InvisibilityCloak.Duration");
+    public int getChance() {
+        return getInt("Abilities.Thor.Chance");
     }
 
 }

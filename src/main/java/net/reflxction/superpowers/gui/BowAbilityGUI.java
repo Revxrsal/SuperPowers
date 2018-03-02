@@ -1,5 +1,5 @@
 /*
- * * Copyright 2017-2018 github.com/ReflxctionDev
+ * * Copyright 2018 github.com/ReflxctionDev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 
 package net.reflxction.superpowers.gui;
 
-import net.reflxction.superpowers.config.abilities.*;
+import net.reflxction.superpowers.config.abilities.QuickArcheryConfig;
+import net.reflxction.superpowers.config.bow_abilities.*;
 import net.reflxction.superpowers.core.SuperPowers;
 import net.reflxction.superpowers.utils.managers.ConfigVariables;
 import org.bukkit.Bukkit;
@@ -24,33 +25,37 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class AbilityGUI {
+public class BowAbilityGUI {
 
     private SuperPowers m;
 
-    public AbilityGUI(SuperPowers m) {
+    public BowAbilityGUI(SuperPowers m) {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
-    private final ConfigVariables c = new ConfigVariables(m);
+    private ConfigVariables c = new ConfigVariables(m);
 
-    /**
-     * @param p Player to open the inventory for
-     */
     public void openGUI(Player p) {
-        final Inventory gui = Bukkit.createInventory(null, 45, ChatColor.translateAlternateColorCodes('&', c.getAbilitiesGuiName()));
-        BomberConfig bc = new BomberConfig(m);
-        FirePunchConfig fc = new FirePunchConfig(m);
-        InvisibleCloakConfig ic = new InvisibleCloakConfig(m);
-        IronFistConfig ifc = new IronFistConfig(m);
-        ThorConfig tc = new ThorConfig(m);
-        VampireConfig vc = new VampireConfig(m);
-        gui.setItem(bc.getSlot(), bc.getOverallItem());
+        Inventory gui = Bukkit.createInventory(null, 45, format(c.getBAbilitiesGuiName()));
+
+        ExplosiveArrowsConfig exc = new ExplosiveArrowsConfig(m);
+        FlamingArrowsConfig fc = new FlamingArrowsConfig(m);
+        MonsterArrowsConfig mc = new MonsterArrowsConfig(m);
+        WolfArrowsConfig wc = new WolfArrowsConfig(m);
+        InfiniteArrowsConfig ic = new InfiniteArrowsConfig(m);
+        QuickArcheryConfig qc = new QuickArcheryConfig(m);
+
+        gui.setItem(exc.getSlot(), exc.getOverallItem());
         gui.setItem(fc.getSlot(), fc.getOverallItem());
+        gui.setItem(mc.getSlot(), mc.getOverallItem());
+        gui.setItem(wc.getSlot(), wc.getOverallItem());
         gui.setItem(ic.getSlot(), ic.getOverallItem());
-        gui.setItem(ifc.getSlot(), ifc.getOverallItem());
-        gui.setItem(tc.getSlot(), tc.getOverallItem());
-        gui.setItem(vc.getSlot(), vc.getOverallItem());
+        gui.setItem(qc.getSlot(), qc.getOverallItem());
         p.openInventory(gui);
     }
+
+    private String format(String s) {
+        return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
 }

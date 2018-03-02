@@ -1,9 +1,11 @@
 name: SuperPowers
 version: ${project.version}
 main: net.reflxction.superpowers.core.SuperPowers
-authors: [Reflxction]
-softdepend: [TitleAPI]
+author: Reflxction
+softdepend: [TitleAPI, MegaChat]
 description: A plugin which adds super powers and abilities
 commands:
   ability:
     description: Open the abilities GUI.
+  bowability:
+    description: Open the bow abilitise GUI

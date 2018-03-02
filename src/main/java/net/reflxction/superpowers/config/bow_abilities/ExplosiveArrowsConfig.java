@@ -14,36 +14,39 @@
  * limitations under the License.
  */
 
-package net.reflxction.superpowers.config.abilities;
+package net.reflxction.superpowers.config.bow_abilities;
 
-import net.reflxction.superpowers.config.IAbilityConfigHandler;
-import net.reflxction.superpowers.core.AbilityType;
+import net.reflxction.superpowers.config.IBowAbiliyConfigHandler;
+import net.reflxction.superpowers.core.BowAbility;
 import net.reflxction.superpowers.core.SuperPowers;
 
-public class InvisibleCloakConfig implements IAbilityConfigHandler {
+public class ExplosiveArrowsConfig implements IBowAbiliyConfigHandler {
 
     private SuperPowers m;
 
-    public InvisibleCloakConfig(SuperPowers m) {
+    public ExplosiveArrowsConfig(SuperPowers m) {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
     @Override
-    public AbilityType getAbility() {
-        return AbilityType.INVISIBLE_CLOAK;
+    public BowAbility getAbility() {
+        return BowAbility.EXPLOSIVE_ARROWS;
+    }
+
+    public int getExplosionPower() {
+        return getInt("BowAbilities.ExplosiveArrows.ExplosionPower");
+    }
+
+    public boolean leaveFire() {
+        return getBoolean("BowAbilities.ExplosiveArrows.LeaveFire");
+    }
+
+    public int getChance() {
+        return getInt("BowAbilities.ExplosiveArrows.Chance");
     }
 
     @Override
     public SuperPowers getPlugin() {
         return m;
     }
-
-    public boolean showParticles() {
-        return getBoolean("Abilities.InvisibilityCloak.ShowParticles");
-    }
-
-    public int getDuration() {
-        return getInt("Abilities.InvisibilityCloak.Duration");
-    }
-
 }

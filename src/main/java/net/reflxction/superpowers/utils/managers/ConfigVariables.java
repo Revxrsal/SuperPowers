@@ -1,22 +1,33 @@
+/*
+ * * Copyright 2018 github.com/ReflxctionDev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package net.reflxction.superpowers.utils.managers;
 
+import net.reflxction.superpowers.api.ConfigAccess;
 import net.reflxction.superpowers.core.SuperPowers;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 
 import java.util.List;
 
-/**
- * Created by Reflxction, on 01/31/18.
- */
-public class ConfigVariables {
+public class ConfigVariables implements ConfigAccess{
 
-    private SuperPowers m = SuperPowers.getPlugin(SuperPowers.class);
-
-    private final String i = "InvisibilityCloak";
+    private SuperPowers m;
 
     public ConfigVariables(SuperPowers m) {
-        //this.m = m;
+        this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
     /**
@@ -24,15 +35,7 @@ public class ConfigVariables {
      * @return String value of the entered path
      */
     private String getString(String path) {
-        return m.getConfig().getString(path);
-    }
-
-    /**
-     * @param path Path to the variable
-     * @return Boolean value of the entered path
-     */
-    private boolean getBool(String path) {
-        return m.getConfig().getBoolean(path);
+        return getConfig().getString(path);
     }
 
     /**
@@ -40,7 +43,7 @@ public class ConfigVariables {
      * @return Integer value of the entered path
      */
     private int getInt(String path) {
-        return m.getConfig().getInt(path);
+        return getConfig().getInt(path);
     }
 
     /**
@@ -48,88 +51,42 @@ public class ConfigVariables {
      * @return List of String objects of the entered path
      */
     public List<String> getList(String path) {
-        List<String> list = m.getConfig().getStringList(path);
+        List<String> list = getConfig().getStringList(path);
         for (int i = 0; i < list.size(); i++) {
             list.set(i, ChatColor.translateAlternateColorCodes('&', list.get(i)));
         }
         return list;
     }
 
-    private Material getMaterial(String path) {
-        return Material.getMaterial(getString(path).toUpperCase());
-    }
-
     /**
      * @return Duration of the invisibility cloak in ticks.
      */
-    public int getInvisibilityDuration() {
-        return getInt("Abilities.InvisibilityCloak.Duration");
-    }
 
     /**
      * @return Should the invisibility cloak show particles when invisible
      */
-    public boolean showParticles() {
-        return getBool("Abilities." + i + ".ShowParticles");
+
+    public String getAbilitiesGuiName() {
+        return getString("AbilityGuiName");
     }
 
-    public String getGuiName() {
-        return getString("Abilities.GUI-Name");
+    public String getBAbilitiesGuiName() {
+        return getString("BowAbilityGuiName");
     }
 
-    public int getSlotInvisCloak() {
-        return getInt("Abilities.InvisibilityCloak.Item.Slot");
+
+    public int getAbilityCommandCooldown() {
+        return getInt("Ability-Command-Delay");
     }
 
-    public int getSlotFPunch() {
-        return getInt("Abilities.FirePunch.Item.Slot");
+    public int getBAbilityCommandCooldown() {
+        return getInt("BowAbility-Command-Delay");
     }
 
-    public int getCommandCooldown() {
-        return getInt("Command-Delay");
-    }
 
-    public int getFPunchChance() {
-        return getInt("Abilities.FirePunch.Chance");
-    }
-
-    public int getFPunchFireTicks() {
-        return getInt("Abilities.FirePunch.FireLastsFor");
-    }
-
-    public int getBomberExplosionPower() {
-        return getInt("Abilities.Bomber.ExplosionPower");
-    }
-
-    public int getThorChance() {
-        return getInt("Abilities.Thor.Chance");
-    }
-
-    public int getThorSlot() {
-        return getInt("Abilities.Thor.Item.Slot");
-    }
-
-    public int getVampireChance() {
-        return getInt("Abilities.Vampire.Chance");
-    }
-
-    public int getVampireDuration() {
-        return getInt("Abilities.Vampire.Duration");
-    }
-
-    public int getVampireSlot() {
-        return getInt("Abilities.Vampire.Item.Slot");
-    }
-
-    public int getIronFistChance() {
-        return getInt("Abilities.IronFist.Chance");
-    }
-
-    public int getIronFistExtraDamage() {
-        return getInt("Abilities.IronFist.ExtraDamage");
-    }
-
-    public int getIronFistSlot() {
-        return getInt("Abilities.IronFist.Item.Slot");
+    @Override
+    public SuperPowers getPlugin() {
+        System.out.println(m);
+        return m;
     }
 }

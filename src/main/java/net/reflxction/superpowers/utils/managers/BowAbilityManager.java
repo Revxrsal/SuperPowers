@@ -16,35 +16,41 @@
 
 package net.reflxction.superpowers.utils.managers;
 
-import net.reflxction.superpowers.core.AbilityType;
+import net.reflxction.superpowers.api.ConfigAccess;
+import net.reflxction.superpowers.core.BowAbility;
 import net.reflxction.superpowers.core.SuperPowers;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
 
-public class AbilityManager {
+public class BowAbilityManager implements ConfigAccess {
 
     private SuperPowers m;
 
-    public AbilityManager(SuperPowers m) {
+    public BowAbilityManager(SuperPowers m) {
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
-    public AbilityType getAbility(Player p) {
-        String abilityName = m.getPlayerDataConfig().getString("Players." + p.getName() + ".Ability");
-        AbilityType a = AbilityType.getAbilityByName(abilityName) == null ? AbilityType.NONE : AbilityType.getAbilityByName(abilityName);
-        return a;
+    public BowAbility getAbility(Player p) {
+        String abilityName = getPlayerDataFile().getString("Players." + p.getName() + ".BowAbility");
+        return BowAbility.getAbilityByName(abilityName);
     }
 
-    public void setAbility(Player p, AbilityType abilityType) {
-        m.getPlayerDataConfig().set("Players." + p.getName() + ".UUID", p.getUniqueId().toString());
-        m.getPlayerDataConfig().set("Players." + p.getName() + ".Name", p.getName());
-        m.getPlayerDataConfig().set("Players." + p.getName() + ".Ability", abilityType.getName());
+    public void setAbility(Player p, BowAbility ability) {
+        getPlayerDataFile().set("Players." + p.getName() + ".UUID", p.getUniqueId().toString());
+        getPlayerDataFile().set("Players." + p.getName() + ".Name", p.getName());
+        getPlayerDataFile().set("Players." + p.getName() + ".BowAbility", ability.getName());
         try {
-            m.getPlayerDataConfig().save(new File(m.getDataFolder(), "playerdata.yml"));
+            getPlayerDataFile().save(new File(getDataFolder(), "playerdata.yml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public SuperPowers getPlugin() {
+        return m;
     }
 }

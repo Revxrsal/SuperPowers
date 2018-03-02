@@ -4,7 +4,6 @@ import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,11 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Easily create itemstacks, without messing your hands. <i>Note that if you do
- * use this in one of your projects, leave this notice.</i> <i>Please do credit
- * me if you do use this in one of your projects.</i>
- *
  * @author NonameSL
+ *
+ * ^ Special thanks for this dude for making this amazing class
  */
 public class ItemBuilder {
     private ItemStack is;

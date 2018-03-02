@@ -16,26 +16,26 @@
 
 package net.reflxction.superpowers.bowabilities;
 
-import net.reflxction.superpowers.config.bow_abilities.ExplosiveArrowsConfig;
+import net.reflxction.superpowers.config.bow_abilities.FlamingArrowsConfig;
 import net.reflxction.superpowers.core.AbstractProjectileListener;
 import net.reflxction.superpowers.core.BowAbility;
 import net.reflxction.superpowers.core.SuperPowers;
 import net.reflxction.superpowers.utils.CheckUtils;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 import java.util.Random;
 
-public class ExplosiveArrows extends AbstractProjectileListener {
+public class FlamingArrows extends AbstractProjectileListener {
+
+    private FlamingArrowsConfig fconfig = new FlamingArrowsConfig(getPlugin());
+
     private SuperPowers m;
 
-    private ExplosiveArrowsConfig econfig = new ExplosiveArrowsConfig(m);
-
-    public ExplosiveArrows(SuperPowers m) {
+    public FlamingArrows(SuperPowers m) {
         super(m);
-        this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
     @EventHandler
@@ -43,21 +43,13 @@ public class ExplosiveArrows extends AbstractProjectileListener {
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
         if (event.getEntity().getShooter() instanceof Player) {
             Player p = ((Player) event.getEntity().getShooter());
-            if (CheckUtils.canUseAbility(p, BowAbility.EXPLOSIVE_ARROWS)) {
-                event.getEntity().setCustomName("ExplosiveArrows");
-            }
-        }
-    }
-
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent event) {
-        if (event.getEntity().getCustomName() != null && event.getEntity().getCustomName().equalsIgnoreCase("ExplosiveArrows")) {
-            System.out.println(econfig.getChance());
-            Random r = new Random();
-            int x = r.nextInt(100) + 1;
-            if (x <= econfig.getChance()) {
-                title(((Player) event.getEntity().getShooter()), BowAbility.EXPLOSIVE_ARROWS);
-                event.getEntity().getWorld().createExplosion(event.getEntity().getLocation(), econfig.getExplosionPower(), econfig.leaveFire());
+            if (CheckUtils.canUseAbility(p, BowAbility.FLAMING_ARROWS)) {
+                Random r = new Random();
+                int x = r.nextInt(100) + 1;
+                if (x <= fconfig.getChance()) {
+                    Arrow a = (Arrow) event.getEntity();
+                    a.setFireTicks(Integer.MAX_VALUE);
+                }
             }
         }
     }

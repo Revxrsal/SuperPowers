@@ -1,5 +1,22 @@
+/*
+ * * Copyright 2018 github.com/ReflxctionDev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package net.reflxction.superpowers.gui;
 
+import net.reflxction.superpowers.config.abilities.*;
 import net.reflxction.superpowers.core.AbilityType;
 import net.reflxction.superpowers.core.SuperPowers;
 import net.reflxction.superpowers.utils.managers.AbilityManager;
@@ -14,15 +31,12 @@ import org.bukkit.inventory.Inventory;
 
 import java.io.IOException;
 
-/**
- * Created by Reflxction, on 01/31/18.
- */
-public class AbilityInventoryListener implements Listener {
+public class AbilityGUIListener implements Listener {
 
     private SuperPowers m;
 
-    public AbilityInventoryListener(SuperPowers m) {
-        this.m = (m == null) ? SuperPowers.getPlugin() : m;
+    public AbilityGUIListener(SuperPowers m) {
+        this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
     private final ConfigVariables c = new ConfigVariables(m);
@@ -43,13 +57,13 @@ public class AbilityInventoryListener implements Listener {
         final Player p = (Player) event.getWhoClicked();
         final MessageManager mm = new MessageManager(m);
         // Checking if the inventory is the one specified in the config
-        if (title.equalsIgnoreCase(ChatColor.stripColor(format(c.getGuiName())))) {
-            final int invis = c.getSlotInvisCloak();
-            final int bomber = c.getSlotBomber();
-            final int fpunch = c.getSlotFPunch();
-            final int thor = c.getThorSlot();
-            final int vampire = c.getVampireSlot();
-            final int ifist = c.getIronFistSlot();
+        if (title.equalsIgnoreCase(ChatColor.stripColor(format(c.getAbilitiesGuiName())))) {
+            final int invis = new InvisibleCloakConfig(m).getSlot();
+            final int bomber = new BomberConfig(m).getSlot();
+            final int fpunch = new FirePunchConfig(m).getSlot();
+            final int thor = new ThorConfig(m).getSlot();
+            final int vampire = new VampireConfig(m).getSlot();
+            final int ifist = new IronFistConfig(m).getSlot();
             if (slot == invis) {
                 mm.sendMessage(p, "&eYour ability has been set to &cInvisible Cloak");
                 au.setAbility(p, AbilityType.INVISIBLE_CLOAK);
@@ -71,7 +85,7 @@ public class AbilityInventoryListener implements Listener {
                 cancel(event);
             }
             if (slot == vampire) {
-                mm.sendMessage(p, "&eYour ability has been set to &cVampre");
+                mm.sendMessage(p, "&eYour ability has been set to &cVampire");
                 au.setAbility(p, AbilityType.VAMPIRE);
                 cancel(event);
             }
@@ -80,6 +94,7 @@ public class AbilityInventoryListener implements Listener {
                 au.setAbility(p, AbilityType.IRON_FIST);
                 cancel(event);
             }
+
         }
     }
 
