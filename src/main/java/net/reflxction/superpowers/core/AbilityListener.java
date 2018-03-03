@@ -18,17 +18,13 @@ package net.reflxction.superpowers.core;
 
 import com.connorlinfoot.titleapi.TitleAPI;
 import net.reflxction.superpowers.api.ConfigAccess;
-import net.reflxction.superpowers.utils.managers.AbilityManager;
-import net.reflxction.superpowers.utils.managers.ConfigVariables;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
 
+@FunctionalInterface
 public interface AbilityListener extends Listener, ConfigAccess {
 
     SuperPowers getPlugin();
-
-    ConfigVariables c = new ConfigVariables(SuperPowers.getPlugin(SuperPowers.class));
 
     default void title(Player p, AbilityType a) {
         final int fadeIn = getAbilitiesConfig().getInt("Abilities." + a.getName() + ".TitleOnAbility.FadeInTicks");

@@ -18,30 +18,51 @@ package net.reflxction.superpowers.api;
 
 import net.reflxction.superpowers.core.SuperPowers;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
+/**
+ * A simple functional interface which gives direct access to the plugin's main files
+ */
+@FunctionalInterface
 public interface ConfigAccess {
 
+    /**
+     * @return Main class instance
+     */
     SuperPowers getPlugin();
-    
+
+    /**
+     * @return Instance of config.yml
+     */
     default FileConfiguration getConfig() {
         return getPlugin().getConfig();
     }
 
+    /**
+     * @return Instance of playerdata.yml
+     */
     default FileConfiguration getPlayerDataFile() {
         return getPlugin().getPlayerDataConfig();
     }
 
+    /**
+     * @return Instance of abilities.yml
+     */
     default FileConfiguration getAbilitiesConfig() {
         return getPlugin().getAbilitiesConfig();
     }
 
+    /**
+     * @return Instance of bowabilities.yml
+     */
     default FileConfiguration getBowAbilitiesConfig() {
         return getPlugin().getBowAbilitiesConfig();
     }
 
+    /**
+     * @return Instance of the data folder
+     */
     default File getDataFolder() {
         return getPlugin().getDataFolder();
     }

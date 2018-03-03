@@ -24,8 +24,5 @@ public class ApiEventExample implements Listener {
 
     @EventHandler
     public void onPlayerUseAbility(PlayerUseAbilityEvent event) {
-        System.out.println(event.getAbility());
-        System.out.println(event.getPlayer().getName());
     }
-
 }

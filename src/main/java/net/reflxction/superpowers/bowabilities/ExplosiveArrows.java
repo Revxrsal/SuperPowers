@@ -52,7 +52,6 @@ public class ExplosiveArrows extends AbstractProjectileListener {
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
         if (event.getEntity().getCustomName() != null && event.getEntity().getCustomName().equalsIgnoreCase("ExplosiveArrows")) {
-            System.out.println(econfig.getChance());
             Random r = new Random();
             int x = r.nextInt(100) + 1;
             if (x <= econfig.getChance()) {

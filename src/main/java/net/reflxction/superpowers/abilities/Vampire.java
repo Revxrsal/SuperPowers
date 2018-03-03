@@ -32,30 +32,50 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
+/**
+ * Represents the listener for the Vampire ability
+ */
 public class Vampire implements AbilityListener {
 
+    // Main class instance
     private SuperPowers m;
 
+    /**
+     * @param m Main class instance
+     */
     public Vampire(SuperPowers m) {
+        // Use the static method provided by Bukkit if the constructor fails to set the instance
         this.m = (m == null) ? SuperPowers.getPlugin(SuperPowers.class) : m;
     }
 
+    // Instance of the config manager for this ability
     private final VampireConfig vconfig = new VampireConfig(m);
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        // Check if the damager was a player (not an entity)
         if (event.getDamager() instanceof Player) {
+            // Cast the damager to a player so we can use player methods
             final Player p = ((Player) event.getDamager());
+            // Cast the entity to a living entity so we can add potion effects
             final LivingEntity e = (LivingEntity) event.getEntity();
+            // Check if the player can use the ability
             if (CheckUtils.canUseAbility(p, AbilityType.VAMPIRE)) {
+                // Run the API
                 PlayerUseAbilityEvent apiEvent = new PlayerUseAbilityEvent(p, AbilityType.VAMPIRE);
                 Bukkit.getPluginManager().callEvent(apiEvent);
+                // Check if the event wasn't cancelled by the API
                 if (!apiEvent.isCancelled()) {
+                    // Handle the chance
                     int chance = new Random().nextInt(100 - 1) + 1;
                     if (vconfig.getChance() >= chance) {
+                        // Check if the regeneration is enabled
                         if (vconfig.isRegenEnabled())
+                            // Add the regen effect
                             p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, vconfig.getRegenDuration(), 1));
+                        // Add the poison effect to the damaged entity
                         e.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, vconfig.getDuration(), 3, true));
+                        // Manage the title for the player
                         title(p, AbilityType.VAMPIRE);
                     }
                 }

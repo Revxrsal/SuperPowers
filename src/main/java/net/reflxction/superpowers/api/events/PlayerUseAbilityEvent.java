@@ -24,22 +24,35 @@ import org.bukkit.event.player.PlayerEvent;
 
 public class PlayerUseAbilityEvent extends PlayerEvent implements Cancellable {
 
-    private AbilityType abilityType;
+    // The player ability
+    private AbilityType ability;
 
+    // If the event is cancelled
     private boolean cancelled;
 
-    private static final HandlerList handlers = new HandlerList();
+    // Bukkit event handler
+    private static HandlerList handlers = new HandlerList();
 
-    public PlayerUseAbilityEvent(Player who, AbilityType abilityType) {
+    /**
+     * @param who     The player
+     * @param ability The ability
+     */
+    public PlayerUseAbilityEvent(Player who, AbilityType ability) {
         super(who);
-        this.abilityType = abilityType;
+        this.ability = ability;
     }
 
+    /**
+     * @return Handler list which bukkit needs to handle the event
+     */
     @Override
     public HandlerList getHandlers() {
         return handlers;
     }
 
+    /**
+     * @return The actual method that bukkit needs to run the API, idk why dont ask me lol
+     */
     public static HandlerList getHandlerList() {
         return handlers;
     }
@@ -55,7 +68,7 @@ public class PlayerUseAbilityEvent extends PlayerEvent implements Cancellable {
     }
 
     public AbilityType getAbility() {
-        return abilityType;
+        return ability;
     }
 
 }

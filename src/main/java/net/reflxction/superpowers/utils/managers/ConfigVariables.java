@@ -35,24 +35,32 @@ public class ConfigVariables implements ConfigAccess {
         return getConfig().getString(path);
     }
 
-
+    /**
+     * @return GUI name (inventory name) for the ability gui
+     */
     public String getAbilitiesGuiName() {
         return getString("AbilityGuiName");
     }
 
+    /**
+     * @return GUI name (inventory name) for the bow ability gui
+     */
     public String getBAbilitiesGuiName() {
         return getString("BowAbilityGuiName");
     }
 
-
+    /**
+     * @return Command cooldown for /ability
+     */
     public int getAbilityCommandCooldown() {
         return getConfig().getInt("Ability-Command-Delay");
     }
 
-
+    /**
+     * @return Instance of the main class
+     */
     @Override
     public SuperPowers getPlugin() {
-        System.out.println(m);
         return m;
     }
 }

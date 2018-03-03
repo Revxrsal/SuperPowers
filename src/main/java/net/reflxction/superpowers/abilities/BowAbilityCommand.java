@@ -71,7 +71,7 @@ public class BowAbilityCommand implements CommandExecutor {
             Player p = (Player) sender;
             // Checking if they have the permission to use the command
             if (p.hasPermission("superpowers.bow_abilities.command")) {
-                // CHeck if their delay isn't over yet
+                // Check if their delay isn't over yet
                 if (cooldownTime.containsKey(p.getUniqueId())) {
                     // Send the delay message
                     p.sendMessage(su.format(su.filter("&cThis command is on cooldown! Time left: &c&l{time_left}", p, cooldownTime.get(p.getUniqueId()))));

@@ -56,14 +56,6 @@ public class MessageManager {
         return getMessage("NoPermissionAbility");
     }
 
-    /*
-        public void sendMessage(Player p, String message) {
-            System.out.println(au);
-            System.out.println(au.getCooldownTime());
-            System.out.println(au.getCooldownTime().get(p));
-            //p.sendMessage(format(su.filter(message, p, au.getCooldownTime().get(p))));
-        }
-    */
     public void sendMessage(Player p, String message) {
         p.sendMessage(format(message));
     }

@@ -24,32 +24,58 @@ import org.bukkit.event.player.PlayerEvent;
 
 public class PlayerSelectAbilityEvent extends PlayerEvent implements Cancellable {
 
-    private AbilityType newAbilityType;
+    // The new ability the player selected
+    private AbilityType newAbility;
 
+    // The Bukkit-event-bus needed variables
     private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;
 
-    public PlayerSelectAbilityEvent(final Player who, final AbilityType newAbilityType) {
+    /**
+     * @param who        The player
+     * @param newAbility The new ability
+     */
+    public PlayerSelectAbilityEvent(final Player who, final AbilityType newAbility) {
         super(who);
-        this.newAbilityType = newAbilityType;
+        this.newAbility = newAbility;
     }
 
+    /**
+     * @return The event if it is cancelled
+     */
     @Override
     public boolean isCancelled() {
         return cancelled;
     }
 
+    /**
+     * @param cancel The boolean of the event if it's cancelled
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;
     }
 
+    /**
+     * @return Event handler which bukkit needs
+     */
     @Override
     public HandlerList getHandlers() {
         return handlers;
     }
 
+    /**
+     * @return The new ability the player selected
+     */
     public AbilityType getNewAbility() {
-        return newAbilityType;
+        return newAbility;
+    }
+
+    /**
+     * @return The actual method that bukkit needs to run the API, idk why dont ask me lol
+     */
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }
+
